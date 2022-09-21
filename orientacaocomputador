@@ -1,0 +1,84 @@
+#PROVA ORIENTAÇÃO AO OBJETO ANTIGA:
+
+class Computador:
+    def __init__(self, modelo, fabricante, processador, memoria_ram, tamanho_HD, espaco_ocupado_HD, esta_ligado):
+        self.modelo = modelo
+        self.fabricante = fabricante
+        self.processador = processador
+        self.memoria_ram = memoria_ram
+        self.tamanho_HD = tamanho_HD
+        self.espaco_ocupado_HD = espaco_ocupado_HD
+        self.esta_ligado = esta_ligado
+
+
+    def liga(self):
+        status = self.esta_ligado
+
+        if status == 'False':
+            self.esta_ligado = 'True'
+            print("O Computador foi Ligado!")
+
+        elif status == 'True':
+            print("O Computador já está Ligado!")
+
+    def desliga(self):
+        status = self.esta_ligado
+
+        if status == 'True':
+            self.esta_ligado = 'False'
+            print("O Computador foi Desigado!")
+
+        elif status == 'False':
+            print("O Computador já está desligado")
+
+
+    def limparHD(self):
+        limpar = int(input("Digite o tamanho do espaço que deseja liberar do HD: "))
+
+        if limpar > self.espaco_ocupado_HD:
+            print("Valor Inválido! O valor a ser liberado deve ser menor ou igual o Espaço Ocupado no HD")
+
+        elif limpar == self.espaco_ocupado_HD:
+            self.espaco_ocupado_HD = self.espaco_ocupado_HD - limpar
+            print("Você Limpou Completamente o HD ")
+
+        elif limpar < 0 :
+            print("Valor Inválido! O valor a ser liberado deve ser maior do que Zero")
+
+        else:
+            self.espaco_ocupado_HD = self.espaco_ocupado_HD - limpar
+            print(f"Você liberou {limpar} Gbs do seu HD, o novo espaço ocupado no HD é: {self.espaco_ocupado_HD} Gbs")
+
+
+    def ocuparHD(self):
+        ocupar = int(input("Digite o Valor que deseja ocupar no HD: "))
+        espaco_total = self.espaco_ocupado_HD + ocupar
+
+        if espaco_total > self.tamanho_HD:
+            print("Valor inválido. O Valor que você digitou excede o tamanho total do HD!!!")
+
+        elif espaco_total == self.tamanho_HD:
+            self.espaco_ocupado_HD = self.espaco_ocupado_HD + ocupar
+            print("Você ocupou completamento o HD. Sem mais espaço disponível")
+
+        elif ocupar < 0 :
+            print("Valor Inválido! O valor a ser ocupado deve ser maior do que Zero")
+
+        else:
+            self.espaco_ocupado_HD = self.espaco_ocupado_HD + ocupar
+            print(f"Você ocupou {ocupar} Gbs do seu HD, o novo espaço ocupado no HD é: {self.espaco_ocupado_HD} Gbs")
+
+
+    def mostrar_informacoes(self):
+        print(f'Modelo: {self.modelo}, Fabricante: {self.fabricante}, Processador: {self.processador}, Memoria RAM: {self.memoria_ram}, Tamanho do HD: {self.tamanho_HD}, Espaço ocupado no HD: {self.espaco_ocupado_HD}, Está Ligado? : {self.esta_ligado}')
+
+
+#Teste das funções:
+
+pcUm = Computador('Macbook Pro', 'Apple', 'M2', '16gb', 2000, 480, 'False')
+pcUm.desliga()
+pcUm.liga()
+pcUm.limparHD()
+pcUm.ocuparHD()
+
+pcUm.mostrar_informacoes()
